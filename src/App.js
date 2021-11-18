@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Card from './Card';
 
 function App() {
+
+  const [images, setImages] = useState([
+    { url:'https://source.unsplash.com/random/1'},
+    { url:'https://source.unsplash.com/random/2'},
+    { url:'https://source.unsplash.com/random/3'},
+    { url:'https://source.unsplash.com/random/4'},
+    { url:'https://source.unsplash.com/random/5'},
+    { url:'https://source.unsplash.com/random/6'},
+  ])
+
+const handleAdd = () =>{
+setImages([...images,{
+  url:`https://source.unsplash.com/random/${Math.floor(Math.random()*100)}`
+}])
+}
+
+const handleRemove=()=>{
+  setImages(images.slice(0,-1))
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="cardContainer">
+    <Card images ={images}/>
     </div>
+    <div className="buttonContainer">
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleRemove}>Remove</button>
+    </div>
+   
+    </div>
+    
   );
 }
 
